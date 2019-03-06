@@ -10,6 +10,9 @@
     use PHPMailer\PHPMailer\Exception;
     require 'vendor/autoload.php';
 
+    $query = mysqli_query($conn, "SELECT * FROM tbl_login WHERE username = '$_SESSION[username]'");
+    $userdata = mysqli_fetch_array($query);
+
     function buatrp($angka) {
     $rupiah="Rp. ".number_format($angka,0,',','.');
     return $rupiah;
@@ -22,12 +25,12 @@
         return $datetime->format('m/d/Y');
     }
 
-    function mailerSent($nama,$day,$date){
+    function mailerSent($emailadmin,$emaipass,$nama,$day,$date,$email){
         $mail = new PHPMailer(true);
             try {
 
-                $abx = 'codefive65@gmail.com';
-                $bxx = 'Pace1996';
+                $abx = $emailadmin;
+                $bxx = $emaipass;
                 $datestr = date('d-M-Y', strtotime($date));
 
                 $mail->isSMTP();                                      
@@ -39,8 +42,8 @@
                 $mail->Port = 587;                                    
 
                 //Recipients
-                $mail->setFrom($abx, 'PLN Disjaya Duri Kosambi');
-                $mail->AddAddress('ryanjoker87@gmail.com');
+                $mail->setFrom($abx, 'PLN Cengkareng');
+                $mail->AddAddress($email);
 
                 //Content
                 $mail->isHTML(true);
@@ -80,9 +83,6 @@
             url=?page=vendor'>";
         }
     }
-
-    $query = mysqli_query($conn, "SELECT * FROM tbl_login WHERE username = '$_SESSION[username]'");
-    $userdata = mysqli_fetch_array($query);
 ?>
 <nav class="navbar navbar-static-top" role="navigation">
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -99,7 +99,7 @@
             <ul class="dropdown-menu">
                 <li class="user-header">
                     <img src="images/admin.png" class="img-circle" alt="User Image">
-                    <p><b><?= $userdata['username'] ?></b></p>
+                    <p><b><a href="?page=profile&id=<?=$userdata['id_login'] ?>" title="lihat profil" style="color:#fff;"><?= $userdata['username'] ?></a></b></p>
                     Terakhir Login : <?= $userdata['last_active'] ?>
                 </li>
                 <li class="user-footer">

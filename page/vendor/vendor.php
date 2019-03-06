@@ -16,7 +16,7 @@
                     <?php
                         $sum        = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor"));
                         $sudahkirim = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor WHERE kirim_notif<>0"));
-                        $count = (($sudahkirim/$sum)*100);
+                        $count = round((($sudahkirim/$sum)*100),0);
                         $hasil = "width:".$count."%";
                     ?>
                     <div class="row">
@@ -62,10 +62,21 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="callout callout-info">
+                <h4>Informasi !</h4>
+                <p>Notifikasi email akan dikirimkan 5 hari sebelum kontrak vendor berakhir. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo 5 hari, silahkan klik tombol <a href="?page=vendor" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title"><b>Vendor</b> | List</h3>
                     <div class="pull-right">
+                        <a class="btn btn-warning" href="?page=vendor">
+                            <span class="fa fa-refresh"></span> Refresh
+                        </a>
                         <a class="btn btn-success" href="?page=vendoradd">
                             <span class="fa fa-plus-circle"></span> Tambah Data
                         </a>
@@ -105,9 +116,33 @@
                                         <td><?= $data['uraian'] ?></td>
                                         <td><span class="fa fa-calendar"></span> <?= date('d-M-Y', strtotime($data['tanggal_mulai'])) ?></td>
                                         <td><span class="fa fa-calendar"></span> <?= date('d-M-Y', strtotime($data['tanggal_selesai'])) ?></td>
-                                        <td><?= buatrp($data['nilai_kontrak_spj_spk']) ?></td>
-                                        <td><?= buatrp($data['nilai_kontrak_akhir_amd']) ?></td>
-                                        <td><?= $data['progress_pekerjaan'] ?>%</td>
+                                        <td>
+                                        <?php
+                                            if (!empty($data['nilai_kontrak_spj_spk'])){
+                                                echo buatrp($data['nilai_kontrak_spj_spk']);
+                                            } else {
+                                                echo "-";
+                                            }
+                                        ?>
+                                        </td>
+                                        <td>
+                                        <?php
+                                            if (!empty($data['nilai_kontrak_akhir_amd'])){
+                                                echo buatrp($data['nilai_kontrak_akhir_amd']);
+                                            } else {
+                                                echo "-";
+                                            }
+                                        ?>
+                                        </td>
+                                        <td>
+                                        <?php 
+                                            if (!empty($data['progress_pekerjaan'])){
+                                                echo $data['progress_pekerjaan']."%";
+                                            } else {
+                                                echo "-";
+                                            }
+                                        ?>
+                                        </td>
                                         <td>
                                         <?php
                                         $date1 = new DateTime(getDateNow());
@@ -119,7 +154,7 @@
                                             } else if ($diff->days <= 30 && $diff->days > 5){
                                                 echo $diff->d." Hari lagi";
                                             } else if ($diff->days == 5 && $data['kirim_notif'] != 1 ){
-                                                mailerSent($data['nama_vendor'],$diff->days,$data['tanggal_selesai']);
+                                                mailerSent($userdata['email'],$userdata['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['email_vendor']);
                                                 udpateCekNotif($data['id_vendor']);
                                                 echo $diff->d." Hari lagi";
                                             } else {
@@ -147,7 +182,6 @@
                                         ?>
                                         </td>
                                         <td>
-                                        <a class="btn btn-warning btn-xs" href="?page=vendorview&id=<?= $data['id_vendor'] ?>"><i class="fa fa-eye"></i> lihat</a>
                                             <a class="btn btn-primary btn-xs" href="?page=vendoredit&id=<?= $data['id_vendor'] ?>"><i class="fa fa-edit"></i> edit</a>
                                             <a class="btn btn-danger btn-xs" href="?page=vendordelete&id=<?= $data['id_vendor'] ?>"><i class="fa fa-trash"></i> hapus</a>
                                         </td>

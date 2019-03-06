@@ -15,6 +15,10 @@ elseif ($page == "logout") include("page/logout.php");
     elseif ($page == "vendorview")       include("page/vendor/vendorview.php");
     elseif ($page == "vendordelete")     include("page/vendor/vendordelete.php");
 
+    // -------------------------- vendor --------------------------
+    elseif ($page == "profile")           include("page/profile/profile.php");
+    elseif ($page == "profileeditpro")    include("page/profile/profileeditpro.php");
+
 else echo"Konten tidak ada";
 
 ?>

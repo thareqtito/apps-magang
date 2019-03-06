@@ -20,6 +20,7 @@
                             
                             $nokontrak         = $_POST['no_kontrak'];
                             $namavendor        = $_POST['nama_vendor'];
+                            $emailvendor       = $_POST['email_vendor'];
                             $uraian            = addslashes($_POST['uraian_kegiatan']);
                             $tglmulai          = date('Y-m-d', strtotime($_POST['tanggal_mulai']));
                             $tglselesai        = date('Y-m-d', strtotime($_POST['tanggal_selesai']));
@@ -30,6 +31,7 @@
                                 $input = mysqli_query($conn,"INSERT INTO tbl_Vendor SET
                                         no_kontrak                  = '$nokontrak',
                                         nama_vendor                 = '$namavendor',
+                                        email_vendor                = '$emailvendor',
                                         uraian                      = '$uraian',
                                         tanggal_mulai               = '$tglmulai',
                                         tanggal_selesai             = '$tglselesai',
