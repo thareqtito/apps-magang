@@ -29,7 +29,7 @@
                             $nilkonakhir       = $_POST['nilai_kontrak_akhir'];
                             $progpekerjaan     = $_POST['progress_pekerjaan'];
 
-                                $input = mysqli_query($conn,"UPDATE tbl_Vendor SET
+                                $input = mysqli_query($conn,"UPDATE tbl_vendor SET
                                         no_kontrak                  = '$nokontrak',
                                         nama_vendor                 = '$namavendor',
                                         email_vendor                = '$emailvendor',

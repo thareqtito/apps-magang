@@ -96,6 +96,19 @@ $data = mysqli_fetch_array($query)
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?php if ($data['kirim_notif'] == 1){ ?>
+                            <div class="callout callout-success">
+                                <span class="fa fa-check"></span> Notifikasi sudah terkirim ke email.
+                            </div>
+                            <?php } else { ?>
+                            <div class="callout callout-danger">
+                                <span class="fa fa-remove"></span> Notifikasi belum terkirim ke email.
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer">
                     <input type="submit" name="submit" class="btn btn-success" value="Simpan">

@@ -16,7 +16,7 @@
                     <?php
                         $sum        = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor"));
                         $sudahkirim = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor WHERE kirim_notif<>0"));
-                        $count = round((($sudahkirim/$sum)*100),0);
+                        $count = @round((($sudahkirim/$sum)*100),0);
                         $hasil = "width:".$count."%";
                     ?>
                     <div class="row">
@@ -88,25 +88,33 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th>NO</th>
-                                <th>NO KONTRAK</th>
-                                <th>NAMA VENDOR</th>
-                                <th>EMAIL VENDOR</th>
-                                <th>URAIAN</th>
-                                <th>TANGGAL MULAI</th>
-                                <th>TANGGAL SELESAI</th>
-                                <th>NILAI KONTRAK SPJ/SPK</th>
-                                <th>NILAI KONTRAK AKHIR/AMD</th>
-                                <th>PROGRESS PEKERJAAN</th>
-                                <th>KONTRAK BERAKHIR</th>
-                                <th>NOTIFIKASI EMAIL</th>
-                                <th>AKSI</th>
+                                    <th rowspan="2">NO</th>
+                                    <th rowspan="2">NO KONTRAK</th>
+                                    <th rowspan="2">NAMA VENDOR</th>
+                                    <th rowspan="2">EMAIL VENDOR</th>
+                                    <th rowspan="2">URAIAN</th>
+                                    <th colspan="2">TANGGAL</th>
+                                    <th rowspan="2">NILAI KONTRAK SPJ/SPK</th>
+                                    <th rowspan="2">NILAI KONTRAK AKHIR/AMD</th>
+                                    <th colspan="2">PENAGIHAN</th>
+                                    <th>PEMBAYARAN</th>
+                                    <th rowspan="2">PROGRESS PEKERJAAN</th>
+                                    <th rowspan="2">KONTRAK BERAKHIR</th>
+                                    <th rowspan="2">NOTIFIKASI EMAIL</th>
+                                    <th rowspan="2">AKSI</th>
+                                </tr>
+                                <tr>
+                                    <th>MULAI</th>
+                                    <th>SELESAI</th>
+                                    <th>TANGGAL</th>
+                                    <th>RUPIAH</th>
+                                    <th>RUPIAH</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
                                 $no = 1;
-                                $sql = mysqli_query($conn,"SELECT * FROM tbl_Vendor") or die (mysqli_error($conn));
+                                $sql = mysqli_query($conn,"SELECT * FROM tbl_vendor") or die (mysqli_error($conn));
                                 while($data = mysqli_fetch_array($sql)){ ?>
                                     <tr>    
                                         <td><?= $no ?></td>
@@ -114,8 +122,8 @@
                                         <td><?= $data['nama_vendor'] ?></td>
                                         <td><?= $data['email_vendor'] ?></td>
                                         <td><?= $data['uraian'] ?></td>
-                                        <td><span class="fa fa-calendar"></span> <?= date('d-M-Y', strtotime($data['tanggal_mulai'])) ?></td>
-                                        <td><span class="fa fa-calendar"></span> <?= date('d-M-Y', strtotime($data['tanggal_selesai'])) ?></td>
+                                        <td><span class="fa fa-calendar"></span> <?= date('d M Y', strtotime($data['tanggal_mulai'])) ?></td>
+                                        <td><span class="fa fa-calendar"></span> <?= date('d M Y', strtotime($data['tanggal_selesai'])) ?></td>
                                         <td>
                                         <?php
                                             if (!empty($data['nilai_kontrak_spj_spk'])){
@@ -134,6 +142,9 @@
                                             }
                                         ?>
                                         </td>
+                                        <td>adad</td>
+                                        <td>adad</td>
+                                        <td>adad</td>
                                         <td>
                                         <?php 
                                             if (!empty($data['progress_pekerjaan'])){
@@ -151,9 +162,9 @@
                                         if ($date2 > $date1){
                                             if ($diff->days > 30){
                                                 echo $diff->m." Bulan, ".$diff->d." Hari lagi";
-                                            } else if ($diff->days <= 30 && $diff->days > 5){
+                                            } else if ($diff->days > 7 && $diff->days <= 30){
                                                 echo $diff->d." Hari lagi";
-                                            } else if ($diff->days == 5 && $data['kirim_notif'] != 1 ){
+                                            } else if ($diff->days <= 7 && $data['kirim_notif'] != 1 ){
                                                 mailerSent($userdata['email'],$userdata['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['email_vendor']);
                                                 udpateCekNotif($data['id_vendor']);
                                                 echo $diff->d." Hari lagi";
