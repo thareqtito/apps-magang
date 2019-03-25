@@ -21,7 +21,12 @@
                     $username       = $_POST['username'];
                     $password       = $_POST['password'];
                     $email          = $_POST['email'];
-                    $emailpass      = $_POST['email_pass'];
+
+                    if($userdata['login_role'] == 0){
+                        $emailpass      = $_POST['email_pass'];
+                    } else {
+                        $emailpass      = NULL;
+                    }
 
                         $update = mysqli_query($conn, "UPDATE tbl_login SET
                                         username        = '$username',

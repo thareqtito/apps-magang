@@ -48,14 +48,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php if($data['login_role'] == 0){?>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Password Email</label>
-                                        <input type="text" class="form-control" name="email_pass" value="<?= $data['email_pass'] ?>" placeholder="enter email password ..." required>
+                                        <input type="text" class="form-control" name="email_pass" value="<?= $data['email_pass'] ?>" placeholder="enter email password ...">
                                     </div>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

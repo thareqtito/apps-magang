@@ -28,6 +28,9 @@
                             $nilkonspj         = $_POST['nilai_kontrakspj'];
                             $nilkonakhir       = $_POST['nilai_kontrak_akhir'];
                             $progpekerjaan     = $_POST['progress_pekerjaan'];
+                            $penagihantgl      = date('Y-m-d', strtotime($_POST['penagihan_tanggal']));
+                            $penagihanrupiah   = $_POST['penagihan_rupiah'];
+                            $pembayaranrupiah  = $_POST['pembayaran_rupiah'];
 
                                 $input = mysqli_query($conn,"UPDATE tbl_vendor SET
                                         no_kontrak                  = '$nokontrak',
@@ -38,6 +41,9 @@
                                         tanggal_selesai             = '$tglselesai',
                                         nilai_kontrak_spj_spk       = '$nilkonspj',
                                         nilai_kontrak_akhir_amd     = '$nilkonakhir',
+                                        penagihan_tanggal           = '$penagihantgl',
+                                        penagihan_rupiah            = '$penagihanrupiah',
+                                        pembayaran_rupiah           = '$pembayaranrupiah',
                                         progress_pekerjaan          = '$progpekerjaan'
                                         WHERE id_vendor             = '$idvendor'
                                         ") or die (mysqli_error($conn));

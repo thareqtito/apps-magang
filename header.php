@@ -14,7 +14,6 @@
     $userdata = mysqli_fetch_array($query);
 
     // admin role
-
     $qadmin = mysqli_query($conn, "SELECT * FROM tbl_login WHERE login_role=0");
     $quseradm = mysqli_fetch_array($qadmin);
 
@@ -31,7 +30,7 @@
         return $datetime->format('m/d/Y');
     }
 
-    function mailerSent($emailadmin,$emaipass,$nama,$day,$date,$nokontrak,$uraian,$nominal,$progress,$email){
+    function mailerSent($emailadmin,$emaipass,$nama,$day,$date,$nokontrak,$uraian,$spj,$amd,$penagihan,$pembayaran,$progress,$email){
         $mail = new PHPMailer(true);
             try {
 
@@ -66,8 +65,11 @@
                 $bodyContent .= "<table border='0' cellspacing='0' style='margin-left:20px;'>";
                 $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>No Kontrak</b></td><td>: $nokontrak</td></tr>";
                 $bodyContent .= "<tr><td><b>Uraian</b></td><td>: $uraian</td></tr>";
-                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Nominal</b></td><td>: $nominal</td></tr>";
-                $bodyContent .= "<tr><td><b>Progress</b></td><td>: $progress %</td></tr>";
+                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Nilai Kontrak SPJ/SPK</b></td><td>: $spj</td></tr>";
+                $bodyContent .= "<tr><td><b>Nilai Kontrak AKHIR/AMD</b></td><td>: $amd</td></tr>";
+                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Penagihan</b></td><td>: $penagihan</td></tr>";
+                $bodyContent .= "<tr><td><b>Pembayaran</b></td><td>: $pembayaran</td></tr>";
+                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Progress</b></td><td>: $progress %</td></tr>";
                 $bodyContent .= "</table><p>Terima kasih</p></div>";
                 $bodyContent .= "<div style='background-color:#f2f2f2;height:110px;padding:10px;margin-top:10px;'>";
                 $bodyContent .= "<div style='margin-bottom:-5px;'><img style='margin:auto;display:block;'src='cid:mono' width='50'></div>";

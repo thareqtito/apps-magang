@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2019 at 09:24 AM
+-- Generation Time: Mar 25, 2019 at 10:50 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -43,9 +43,8 @@ CREATE TABLE `tbl_login` (
 --
 
 INSERT INTO `tbl_login` (`id_login`, `username`, `password`, `email`, `email_pass`, `login_role`, `last_active`) VALUES
-(1, 'admin', '123456', 'codefive65@gmail.com', 'Pace1996', 0, '2019-03-25 08:04:42'),
-(2, 'mhdiriansyah', 'Pace1996', 'muhammadiriansyah@ralali.com', NULL, 1, '2019-03-25 07:23:29'),
-(3, 'tito', 'tito2000', 'tito@gmail.com', NULL, 1, '2019-03-25 07:25:33');
+(1, 'admin', '123456', 'codefive65@gmail.com', 'Pace1996', 0, '2019-03-25 09:46:50'),
+(2, 'mhdiriansyah', 'Pace1996', 'muhammadiriansyah@ralali.com', '', 1, '2019-03-25 09:43:55');
 
 -- --------------------------------------------------------
 
@@ -75,9 +74,10 @@ CREATE TABLE `tbl_vendor` (
 --
 
 INSERT INTO `tbl_vendor` (`id_vendor`, `no_kontrak`, `nama_vendor`, `email_vendor`, `uraian`, `tanggal_mulai`, `tanggal_selesai`, `kirim_notif`, `nilai_kontrak_spj_spk`, `nilai_kontrak_akhir_amd`, `penagihan_tanggal`, `penagihan_rupiah`, `pembayaran_rupiah`, `progress_pekerjaan`) VALUES
-(12, 'kontrak0001', 'CODE5', 'ryanjoker87@gmail.com', 'membangun jaringan internet', '2019-03-10', '2019-03-24', 1, 650000, 1150000, '2019-03-25', 5000, 5000, 88),
-(14, 'kontrak00002', 'TAKUPAZ', 'muhammad.iriansyah@ralali.com', 'wkwk', '2019-03-06', '2019-03-31', 1, 5000000, 6000000, '2019-03-25', 5000, 5000, 98),
-(15, 'kontrak0003', 'PT THREECRAFT', 'iriansyah1431299@sttpln.ac.id', 'Banyak-banyak membaca', '2019-03-14', '2019-03-31', 1, 6000000, 6500000, '2019-03-25', 5000, 5000, 87);
+(12, 'kontrak0001', 'CODE5', 'ryanjoker87@gmail.com', 'membangun jaringan internet', '2019-03-10', '2019-03-24', 1, 650000, 1150000, '2019-03-25', 14000000, 15000000, 88),
+(14, 'kontrak00002', 'TAKUPAZ', 'muhammad.iriansyah@ralali.com', 'wkwk', '2019-03-06', '2019-03-31', 1, 5000000, 6000000, '2019-03-25', 5000000, 5000500, 98),
+(15, 'kontrak0003', 'PT THREECRAFT', 'iriansyah1431299@sttpln.ac.id', 'Banyak-banyak membaca', '2019-03-14', '2019-03-31', 1, 6000000, 6500000, '2019-03-25', 7500000, 8500000, 87),
+(16, 'kontrakan', 'Kontrakan Ber-5', 'ryanjoker87@gmail.com', 'Membahas mengenai keutamaan hati', '2019-03-14', '2019-04-01', 1, 5600000, 6000000, '2019-04-04', 6000000, 6500000, 67);
 
 --
 -- Indexes for dumped tables
@@ -109,7 +109,7 @@ ALTER TABLE `tbl_login`
 -- AUTO_INCREMENT for table `tbl_vendor`
 --
 ALTER TABLE `tbl_vendor`
-  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

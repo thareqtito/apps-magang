@@ -53,17 +53,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tanggal Mulai</label>
-                                        <input type="text" class="form-control" id="datepicker" name="tanggal_mulai" placeholder="tanggal mulai ..." autocomplete="off" required>
+                                        <input type="text" class="form-control datepicker" name="tanggal_mulai" placeholder="tanggal mulai ..." autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tanggal Selesai</label>
-                                        <input type="text" class="form-control" id="datepicker2" name="tanggal_selesai" placeholder="tanggal selesai ..." autocomplete="off" required>
+                                        <input type="text" class="form-control datepicker" name="tanggal_selesai" placeholder="tanggal selesai ..." autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="row">
@@ -79,6 +78,50 @@
                             <div class="form-group">
                                 <label>Nilai Kontrak Akhir/AMD</label>
                                 <input type="number" min="0" class="form-control" name="nilai_kontrak_akhir" placeholder="masukkan nilai kontrak akhir/amd ..." autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Penagihan</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row"> 
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Tanggal</label>
+                                        <input type="text" class="form-control datepicker" name="penagihan_tanggal" placeholder="tanggal mulai ..." autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label>Rupiah</label>
+                                        <input type="number" min="0" class="form-control" name="penagihan_rupiah" placeholder="masukkan nominal ..." autocomplete="off" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Pembayaran</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row"> 
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Rupiah</label>
+                                        <input type="number" min="0" class="form-control" name="pembayaran_rupiah" placeholder="masukkan nominal ..." autocomplete="off" required>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

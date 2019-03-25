@@ -4,7 +4,7 @@
         <img src="images/admin.png">
     </div>
     <div class="pull-left info">
-        <p>ADMINISTRATOR</p>
+        <p><?= $userdata['username'] ?></p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
     </div>
@@ -17,12 +17,14 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
     </li>
+    <?php if($userdata['login_role']==0) { ?>
     <li class="<?php if ($_GET['page'] == 'user' || $_GET['page'] == 'useradd' || $_GET['page'] == 'useraddpro' || $_GET['page'] == 'useredit'
                 || $_GET['page'] == 'usereditpro' || $_GET['page'] == 'userview' || $_GET['page'] == 'userdelete'){ echo "active"; } ?>">
         <a href="?page=user">
             <i class="fa fa-user"></i><span>Manajemen User</span>
         </a>
     </li>
+    <?php } ?>
     <li class="<?php if ($_GET['page'] == 'vendor' || $_GET['page'] == 'vendoradd' || $_GET['page'] == 'vendoraddpro' || $_GET['page'] == 'vendoredit'
                 || $_GET['page'] == 'vendoreditpro' || $_GET['page'] == 'vendorview' || $_GET['page'] == 'vendordelete'){ echo "active"; } ?>">
         <a href="?page=vendor">

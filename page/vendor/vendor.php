@@ -64,7 +64,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="callout callout-info">
                 <h4>Informasi !</h4>
-                <p>Notifikasi email akan dikirimkan 5 hari sebelum kontrak vendor berakhir. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo 5 hari, silahkan klik tombol <a href="?page=vendor" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
+                <p>Notifikasi email akan dikirimkan 7 hari sebelum kontrak vendor berakhir. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo 7 hari, silahkan klik tombol <a href="?page=vendor" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
             </div>
         </div>
     </div>
@@ -143,8 +143,8 @@
                                         ?>
                                         </td>
                                         <td><span class="fa fa-calendar"></span> <?= date('d M Y', strtotime($data['penagihan_tanggal'])) ?></td>
-                                        <td><?= $data['penagihan_rupiah'] ?></td>
-                                        <td><?= $data['pembayaran_rupiah'] ?></td>
+                                        <td><?= buatrp($data['penagihan_rupiah']) ?></td>
+                                        <td><?= buatrp($data['pembayaran_rupiah']) ?></td>
                                         <td>
                                         <?php 
                                             if (!empty($data['progress_pekerjaan'])){
@@ -165,7 +165,7 @@
                                             } else if ($diff->days > 7 && $diff->days <= 30){
                                                 echo $diff->d." Hari lagi";
                                             } else if ($diff->days <= 7 && $data['kirim_notif'] != 1 ){
-                                                mailerSent($quseradm['email'],$quseradm['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_akhir_amd']),$data['progress_pekerjaan'],$data['email_vendor']);
+                                                mailerSent($quseradm['email'],$quseradm['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_spj_spk']),buatrp($data['nilai_kontrak_akhir_amd']),buatrp($data['penagihan_rupiah']),buatrp($data['pembayaran_rupiah']),$data['progress_pekerjaan'],$data['email_vendor']);
                                                 udpateCekNotif($data['id_vendor']);
                                                 echo $diff->d." Hari lagi";
                                             } else {

@@ -101,15 +101,15 @@
 </script>
 <script>
   $(function () {
-    $("#datepicker,#datepicker2").datepicker({
+    $(".datepicker").datepicker({
       dateFormat: "mm/dd/yy",
       showOtherMonths: true,
       selectOtherMonths: true,
       autoclose: true,
       changeMonth: true,
       changeYear: true,
-      todayHighlight: true,x
-      orientation: "bottom" 
+      todayHighlight: true,
+      orientation: "bottom"
     });
   });
 </script>
