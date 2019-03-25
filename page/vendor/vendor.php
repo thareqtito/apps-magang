@@ -142,9 +142,9 @@
                                             }
                                         ?>
                                         </td>
-                                        <td>adad</td>
-                                        <td>adad</td>
-                                        <td>adad</td>
+                                        <td><span class="fa fa-calendar"></span> <?= date('d M Y', strtotime($data['penagihan_tanggal'])) ?></td>
+                                        <td><?= $data['penagihan_rupiah'] ?></td>
+                                        <td><?= $data['pembayaran_rupiah'] ?></td>
                                         <td>
                                         <?php 
                                             if (!empty($data['progress_pekerjaan'])){
@@ -165,7 +165,7 @@
                                             } else if ($diff->days > 7 && $diff->days <= 30){
                                                 echo $diff->d." Hari lagi";
                                             } else if ($diff->days <= 7 && $data['kirim_notif'] != 1 ){
-                                                mailerSent($userdata['email'],$userdata['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['email_vendor']);
+                                                mailerSent($quseradm['email'],$quseradm['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_akhir_amd']),$data['progress_pekerjaan'],$data['email_vendor']);
                                                 udpateCekNotif($data['id_vendor']);
                                                 echo $diff->d." Hari lagi";
                                             } else {

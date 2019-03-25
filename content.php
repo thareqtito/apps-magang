@@ -15,6 +15,15 @@ elseif ($page == "logout") include("page/logout.php");
     elseif ($page == "vendorview")       include("page/vendor/vendorview.php");
     elseif ($page == "vendordelete")     include("page/vendor/vendordelete.php");
 
+    // -------------------------- user --------------------------
+    elseif ($page == "user")             include("page/user/user.php");
+    elseif ($page == "useradd")          include("page/user/useradd.php");
+    elseif ($page == "useraddpro")       include("page/user/useraddpro.php");
+    elseif ($page == "useredit")         include("page/user/useredit.php");
+    elseif ($page == "usereditpro")      include("page/user/usereditpro.php");
+    elseif ($page == "userview")         include("page/user/userview.php");
+    elseif ($page == "userdelete")       include("page/user/userdelete.php");
+
     // -------------------------- vendor --------------------------
     elseif ($page == "profile")           include("page/profile/profile.php");
     elseif ($page == "profileeditpro")    include("page/profile/profileeditpro.php");

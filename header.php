@@ -13,6 +13,12 @@
     $query = mysqli_query($conn, "SELECT * FROM tbl_login WHERE username = '$_SESSION[username]'");
     $userdata = mysqli_fetch_array($query);
 
+    // admin role
+
+    $qadmin = mysqli_query($conn, "SELECT * FROM tbl_login WHERE login_role=0");
+    $quseradm = mysqli_fetch_array($qadmin);
+
+
     function buatrp($angka) {
     $rupiah="Rp. ".number_format($angka,0,',','.');
     return $rupiah;
@@ -25,7 +31,7 @@
         return $datetime->format('m/d/Y');
     }
 
-    function mailerSent($emailadmin,$emaipass,$nama,$day,$date,$email){
+    function mailerSent($emailadmin,$emaipass,$nama,$day,$date,$nokontrak,$uraian,$nominal,$progress,$email){
         $mail = new PHPMailer(true);
             try {
 
@@ -51,13 +57,18 @@
                 $mail->AddEmbeddedImage('images/PLN.png', 'logo');
                 $mail->AddEmbeddedImage('images/pln-grey.png', 'mono');
                 $bodyContent = "<div style='background-color:#ffffff;margin:auto;width:80%;border:20px solid #e8e8e8;'>";
-                $bodyContent .= "<div style='background-color:#00a65a;height:70px;padding:5px;overflow:hidden;'>";
+                $bodyContent .= "<div style='background-color:#00a65a;height:120px;padding:5px;overflow:hidden;'>";
                 $bodyContent .= "<img style='float:left;margin:5px;' src='cid:logo' width='6%'><img style='float:right;margin:5px;' src='cid:gg' width='50%'><br/>";
                 $bodyContent .= "</div>";
                 $bodyContent .= "<div style='padding:10px;'>";
                 $bodyContent .= "<p>Kepada yth, <b>$nama</b></p>";
-                $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari</b> Lagi yaitu tepat pada tanggal <b>$datestr</b>.";
-                $bodyContent .= "<p>Terima kasih</p>";
+                $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari</b> Lagi yaitu tepat pada tanggal <b>$date</b>.";
+                $bodyContent .= "<table border='0' cellspacing='0' style='margin-left:20px;'>";
+                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>No Kontrak</b></td><td>: $nokontrak</td></tr>";
+                $bodyContent .= "<tr><td><b>Uraian</b></td><td>: $uraian</td></tr>";
+                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Nominal</b></td><td>: $nominal</td></tr>";
+                $bodyContent .= "<tr><td><b>Progress</b></td><td>: $progress %</td></tr>";
+                $bodyContent .= "</table><p>Terima kasih</p></div>";
                 $bodyContent .= "<div style='background-color:#f2f2f2;height:110px;padding:10px;margin-top:10px;'>";
                 $bodyContent .= "<div style='margin-bottom:-5px;'><img style='margin:auto;display:block;'src='cid:mono' width='50'></div>";
                 $bodyContent .= "<div style='color:#d2d2d2;text-align:center;'><p>PLN Cengkareng, DKI Jakarta, Indonesia</p></div>";

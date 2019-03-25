@@ -35,7 +35,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Password</label>
-                                        <input type="text" class="form-control" name="password" value="<?= $data['password'] ?>" placeholder="enter password ..." required>
+                                        <input id="password-field" type="password" class="form-control" name="password" value="<?= $data['password'] ?>" placeholder="enter password ..." required>
+                                        <span toggle="#password-field" class="fa fa-lg fa-eye field-icon toggle-password"></span>
                                     </div>
                                 </div>
                             </div>

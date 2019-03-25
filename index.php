@@ -27,6 +27,16 @@
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+    .field-icon {
+    float: right;
+    margin-right: 8px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+    cursor:pointer;
+  }
+  </style>
 </head>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
@@ -98,10 +108,21 @@
       autoclose: true,
       changeMonth: true,
       changeYear: true,
-      todayHighlight: true,
+      todayHighlight: true,x
       orientation: "bottom" 
     });
   });
+</script>
+<script>
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
 </script>
 </body>
 </html>

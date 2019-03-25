@@ -17,6 +17,12 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
     </li>
+    <li class="<?php if ($_GET['page'] == 'user' || $_GET['page'] == 'useradd' || $_GET['page'] == 'useraddpro' || $_GET['page'] == 'useredit'
+                || $_GET['page'] == 'usereditpro' || $_GET['page'] == 'userview' || $_GET['page'] == 'userdelete'){ echo "active"; } ?>">
+        <a href="?page=user">
+            <i class="fa fa-user"></i><span>Manajemen User</span>
+        </a>
+    </li>
     <li class="<?php if ($_GET['page'] == 'vendor' || $_GET['page'] == 'vendoradd' || $_GET['page'] == 'vendoraddpro' || $_GET['page'] == 'vendoredit'
                 || $_GET['page'] == 'vendoreditpro' || $_GET['page'] == 'vendorview' || $_GET['page'] == 'vendordelete'){ echo "active"; } ?>">
         <a href="?page=vendor">
