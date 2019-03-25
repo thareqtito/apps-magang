@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 06, 2019 at 10:27 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Host: localhost
+-- Generation Time: Mar 25, 2019 at 09:24 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,8 @@ CREATE TABLE `tbl_login` (
   `username` varchar(30) NOT NULL,
   `password` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `email_pass` varchar(50) NOT NULL,
+  `email_pass` varchar(50) DEFAULT NULL,
+  `login_role` int(1) NOT NULL,
   `last_active` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,8 +42,10 @@ CREATE TABLE `tbl_login` (
 -- Dumping data for table `tbl_login`
 --
 
-INSERT INTO `tbl_login` (`id_login`, `username`, `password`, `email`, `email_pass`, `last_active`) VALUES
-(1, 'ADMINPLN', 'admin1919', 'codefive65@gmail.com', 'Pace1996', '2019-03-06 08:10:18');
+INSERT INTO `tbl_login` (`id_login`, `username`, `password`, `email`, `email_pass`, `login_role`, `last_active`) VALUES
+(1, 'admin', '123456', 'codefive65@gmail.com', 'Pace1996', 0, '2019-03-25 08:04:42'),
+(2, 'mhdiriansyah', 'Pace1996', 'muhammadiriansyah@ralali.com', NULL, 1, '2019-03-25 07:23:29'),
+(3, 'tito', 'tito2000', 'tito@gmail.com', NULL, 1, '2019-03-25 07:25:33');
 
 -- --------------------------------------------------------
 
@@ -61,6 +64,9 @@ CREATE TABLE `tbl_vendor` (
   `kirim_notif` int(1) NOT NULL,
   `nilai_kontrak_spj_spk` int(12) DEFAULT NULL,
   `nilai_kontrak_akhir_amd` int(12) DEFAULT NULL,
+  `penagihan_tanggal` date NOT NULL,
+  `penagihan_rupiah` int(12) NOT NULL,
+  `pembayaran_rupiah` int(12) NOT NULL,
   `progress_pekerjaan` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -68,10 +74,10 @@ CREATE TABLE `tbl_vendor` (
 -- Dumping data for table `tbl_vendor`
 --
 
-INSERT INTO `tbl_vendor` (`id_vendor`, `no_kontrak`, `nama_vendor`, `email_vendor`, `uraian`, `tanggal_mulai`, `tanggal_selesai`, `kirim_notif`, `nilai_kontrak_spj_spk`, `nilai_kontrak_akhir_amd`, `progress_pekerjaan`) VALUES
-(1, '0022/DAN.02.03/A.CKR/2017', 'PT MANGUN KARYA MANDIRI', 'ryanjoker87@gmail.com', 'Pembangunan GH Baru Ex Gardu TG62F', '2019-03-13', '2019-03-11', 1, 307971500, 307971500, 80),
-(2, '0025/DAN.02.03/A.CKR/2017', 'MANDALA INDAH SAKTI', 'ryanjoker87@gmail.com', 'Pembangunan GH Baru MK75A dan TG 102B\r\n', '2019-02-28', '2019-01-04', 1, 263726600, 263726600, 80),
-(4, ' 00114/REN/01.03/ASMAN REN/2017 ', 'MITRA ADIKARSA', 'ryanjoker87@gmail.com', ' Paket 1A Rehab Kabel Tua G Dukos P. Tebing CKG37 ', '2019-03-05', '2019-03-11', 1, 0, 0, 0);
+INSERT INTO `tbl_vendor` (`id_vendor`, `no_kontrak`, `nama_vendor`, `email_vendor`, `uraian`, `tanggal_mulai`, `tanggal_selesai`, `kirim_notif`, `nilai_kontrak_spj_spk`, `nilai_kontrak_akhir_amd`, `penagihan_tanggal`, `penagihan_rupiah`, `pembayaran_rupiah`, `progress_pekerjaan`) VALUES
+(12, 'kontrak0001', 'CODE5', 'ryanjoker87@gmail.com', 'membangun jaringan internet', '2019-03-10', '2019-03-24', 1, 650000, 1150000, '2019-03-25', 5000, 5000, 88),
+(14, 'kontrak00002', 'TAKUPAZ', 'muhammad.iriansyah@ralali.com', 'wkwk', '2019-03-06', '2019-03-31', 1, 5000000, 6000000, '2019-03-25', 5000, 5000, 98),
+(15, 'kontrak0003', 'PT THREECRAFT', 'iriansyah1431299@sttpln.ac.id', 'Banyak-banyak membaca', '2019-03-14', '2019-03-31', 1, 6000000, 6500000, '2019-03-25', 5000, 5000, 87);
 
 --
 -- Indexes for dumped tables
@@ -97,13 +103,13 @@ ALTER TABLE `tbl_vendor`
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_vendor`
 --
 ALTER TABLE `tbl_vendor`
-  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
