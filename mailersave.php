@@ -51,8 +51,7 @@
                 $mail->SMTPSecure = 'ssl';
                 $mail->From = $emailadmin;
                 $mail->FromName = "PLN Cengkareng";
-                $mail->AddReplyTo($emailadmin,"PLN Cengkareng");
-                $mail->AddAddress($to['email'],$to['name']);                       
+                $mail->AddReplyTo($to['noreply@pln.com'],$to['noreply@plnbumn.com']);                              
                 $mail->Priority = 1;
                 $mail->AddCustomHeader("X-MSMail-Priority: High");
                 $mail->WordWrap = 50;  
