@@ -30,16 +30,17 @@
         return $datetime->format('m/d/Y');
     }
 
-    function mailerSent($emailadmin,$emaipass,$nama,$day,$date,$nokontrak,$uraian,$spj,$amd,$penagihan,$pembayaran,$progress,$email){
+    function mailerSent($id,$emailadmin,$emaipass,$nama,$day,$datetwo,$nokontrak,$uraian,$spj,$amd,$penagihan,$pembayaran,$progress,$email){
 
                 $abx = $emailadmin;
                 $bxx = $emaipass;
-                $datestr = date('d-M-Y', strtotime($date));
 
                 //Recipients
-
                 $to['email'] = $email;
                 $to['name'] = $nama."-".$email;
+
+                $date1 = new DateTime(getDateNow());
+                $date2 = new DateTime($datetwo);
 
                 $mail = new PHPMailer;
                 $mail->isSMTP();                                      
@@ -68,7 +69,11 @@
                 $bodyContent .= "</div>";
                 $bodyContent .= "<div style='padding:10px;'>";
                 $bodyContent .= "<p>Kepada yth, <b>$nama</b></p>";
-                $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari</b> Lagi yaitu tepat pada tanggal <b>$date</b>.";
+                if ($date2 > $date1){
+                    $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari Lagi</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
+                } else {
+                    $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari yang lalu</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
+                }
                 $bodyContent .= "<table border='0' cellspacing='0' style='margin-left:20px;'>";
                 $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>No Kontrak</b></td><td>: $nokontrak</td></tr>";
                 $bodyContent .= "<tr><td><b>Uraian</b></td><td>: $uraian</td></tr>";

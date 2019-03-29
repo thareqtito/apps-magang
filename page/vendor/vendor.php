@@ -64,7 +64,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="callout callout-info">
                 <h4>Informasi !</h4>
-                <p>Notifikasi email akan dikirimkan 7 hari sebelum kontrak vendor berakhir. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo 7 hari, silahkan klik tombol <a href="?page=vendor" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
+                <p>Notifikasi email akan dikirimkan sesuai dengan jangka waktu kontrak tiap vendor. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo tiap vendor, silahkan klik tombol <a href="?page=vendor" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
             </div>
         </div>
     </div>
@@ -162,10 +162,10 @@
                                         if ($date2 > $date1){
                                             if ($diff->days > 30){
                                                 echo $diff->m." Bulan, ".$diff->d." Hari lagi";
-                                            } else if ($diff->days > 7 && $diff->days <= 30){
+                                            } else if ($diff->days > $data['jangka_kirim_notif'] && $diff->days <= 30){
                                                 echo $diff->d." Hari lagi";
-                                            } else if ($diff->days <= 7 && $data['kirim_notif'] != 1 ){
-                                                mailerSent($quseradm['email'],$quseradm['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_spj_spk']),buatrp($data['nilai_kontrak_akhir_amd']),buatrp($data['penagihan_rupiah']),buatrp($data['pembayaran_rupiah']),$data['progress_pekerjaan'],$data['email_vendor']);
+                                            } else if ($diff->days <= $data['jangka_kirim_notif'] && $data['kirim_notif'] != 1 ){
+                                                mailerSent($data['id_vendor'],$quseradm['email'],$quseradm['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_spj_spk']),buatrp($data['nilai_kontrak_akhir_amd']),buatrp($data['penagihan_rupiah']),buatrp($data['pembayaran_rupiah']),$data['progress_pekerjaan'],$data['email_vendor']);
                                                 udpateCekNotif($data['id_vendor']);
                                                 echo $diff->d." Hari lagi";
                                             } else {
@@ -185,10 +185,12 @@
                                         </td>
                                         <td>
                                         <?php 
-                                            if ($data['kirim_notif'] != 0 ){
+                                            if ($data['kirim_notif'] != 0 ){ 
                                                 echo "<button class='btn btn-success btn-xs'><span class='fa fa-check'></span> sudah terkirim</button>";
+                                                echo '<a href="?page=vendorsent&idvendor='.$data['id_vendor'].'&admail='.$quseradm['email'].'&adpass='.$quseradm['email_pass'].'&nama='.$data['nama_vendor'].'&day='.$diff->days.'&tglselesai='.$data['tanggal_selesai'].'&nokontrak='.$data['no_kontrak'].'&uraian='.$data['uraian'].'&spj='.buatrp($data['nilai_kontrak_spj_spk']).'&amd='.buatrp($data['nilai_kontrak_akhir_amd']).'&nagihrp='.buatrp($data['penagihan_rupiah']).'&bayarrp='.buatrp($data['pembayaran_rupiah']).'&progress='.$data['progress_pekerjaan'].'&email='.$data['email_vendor'].'" class="btn btn-warning btn-xs"><span class="fa fa-paper-plane"></span> kirim ulang notifikasi</a>';
                                             } else {
                                                 echo "<button class='btn btn-danger btn-xs'><span class='fa fa-remove'></span> belum terkirim</button>";
+                                                echo '<a href="?page=vendorsent&idvendor='.$data['id_vendor'].'&admail='.$quseradm['email'].'&adpass='.$quseradm['email_pass'].'&nama='.$data['nama_vendor'].'&day='.$diff->days.'&tglselesai='.$data['tanggal_selesai'].'&nokontrak='.$data['no_kontrak'].'&uraian='.$data['uraian'].'&spj='.buatrp($data['nilai_kontrak_spj_spk']).'&amd='.buatrp($data['nilai_kontrak_akhir_amd']).'&nagihrp='.buatrp($data['penagihan_rupiah']).'&bayarrp='.buatrp($data['pembayaran_rupiah']).'&progress='.$data['progress_pekerjaan'].'&email='.$data['email_vendor'].'" class="btn btn-warning btn-xs"><span class="fa fa-paper-plane"></span> kirim notifikasi</a>';
                                             }
                                         ?>
                                         </td>

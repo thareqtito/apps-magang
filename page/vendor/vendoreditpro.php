@@ -31,6 +31,8 @@
                             $penagihantgl      = date('Y-m-d', strtotime($_POST['penagihan_tanggal']));
                             $penagihanrupiah   = $_POST['penagihan_rupiah'];
                             $pembayaranrupiah  = $_POST['pembayaran_rupiah'];
+                            $jangkanotif       = $_POST['jangka_notif'];
+                            $kirimnotif        = $_POST['kirim_notif'];
 
                                 $input = mysqli_query($conn,"UPDATE tbl_vendor SET
                                         no_kontrak                  = '$nokontrak',
@@ -39,6 +41,8 @@
                                         uraian                      = '$uraian',
                                         tanggal_mulai               = '$tglmulai',
                                         tanggal_selesai             = '$tglselesai',
+                                        jangka_kirim_notif          = '$jangkanotif',
+                                        kirim_notif                 = '$kirimnotif',
                                         nilai_kontrak_spj_spk       = '$nilkonspj',
                                         nilai_kontrak_akhir_amd     = '$nilkonakhir',
                                         penagihan_tanggal           = '$penagihantgl',

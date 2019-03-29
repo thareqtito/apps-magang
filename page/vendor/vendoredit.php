@@ -69,7 +69,14 @@ $data = mysqli_fetch_array($query)
                                     </div>
                                 </div>
                             </div>
-                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Jangka Kirim Notifikasi</label>
+                                <input type="number" class="form-control" min="1" name="jangka_notif" placeholder="masukkan jangka kirim notifikasi ..." value="<?= $data['jangka_kirim_notif'] ?>" required>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -137,6 +144,17 @@ $data = mysqli_fetch_array($query)
                             <div class="form-group">
                                 <label>Progress Pekerjaan</label>
                                 <input type="number" min="0" class="form-control" name="progress_pekerjaan" placeholder="masukkan nilai progress pekerjaan ..." value="<?= $data['progress_pekerjaan'] ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Notifikasi Terkirim</label>
+                                <select name="kirim_notif" class="form-control">
+                                    <option value="1" <?= ($data['kirim_notif'] == 1) ? "selected" : ""; ?>>ya</option>
+                                    <option value="0" <?= ($data['kirim_notif'] == 0) ? "selected" : ""; ?>>tidak</option>
+                                </select>
                             </div>
                         </div>
                     </div>

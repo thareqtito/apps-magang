@@ -68,6 +68,14 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label>Jangka Kirim Notifikasi</label>
+                                <input type="number" class="form-control" min="1" name="jangka_notif" placeholder="masukkan jangka kirim notifikasi ..." required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label>Nilai Kontrak SPJ/SPK</label>
                                 <input type="number" min="0" class="form-control" name="nilai_kontrakspj" placeholder="masukkan nilai kontrak spj/pjk ..." autocomplete="off">
                             </div>

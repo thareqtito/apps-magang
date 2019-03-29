@@ -14,6 +14,7 @@ elseif ($page == "logout") include("page/logout.php");
     elseif ($page == "vendoreditpro")    include("page/vendor/vendoreditpro.php");
     elseif ($page == "vendorview")       include("page/vendor/vendorview.php");
     elseif ($page == "vendordelete")     include("page/vendor/vendordelete.php");
+    elseif ($page == "vendorsent")       include("page/vendor/vendorsent.php");
 
     // -------------------------- user --------------------------
     elseif ($page == "user")             include("page/user/user.php");
