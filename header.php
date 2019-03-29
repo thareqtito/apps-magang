@@ -72,7 +72,7 @@
                 if ($date2 > $date1){
                     $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari Lagi</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
                 } else {
-                    $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari yang lalu</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
+                    $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda telah berakhir dari <b>$day hari yang lalu</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
                 }
                 $bodyContent .= "<table border='0' cellspacing='0' style='margin-left:20px;'>";
                 $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>No Kontrak</b></td><td>: $nokontrak</td></tr>";
