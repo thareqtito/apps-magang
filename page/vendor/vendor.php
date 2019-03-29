@@ -99,6 +99,7 @@
                                     <th colspan="2">PENAGIHAN</th>
                                     <th>PEMBAYARAN</th>
                                     <th rowspan="2">PROGRESS PEKERJAAN</th>
+                                    <th rowspan="2">NOTIFIKASI AKAN DIKIRIM</th>
                                     <th rowspan="2">KONTRAK BERAKHIR</th>
                                     <th rowspan="2">NOTIFIKASI EMAIL</th>
                                     <th rowspan="2">AKSI</th>
@@ -154,6 +155,7 @@
                                             }
                                         ?>
                                         </td>
+                                        <td><?= $data['jangka_kirim_notif'] ?> hari sebelumnya</td>
                                         <td>
                                         <?php
                                         $date1 = new DateTime(getDateNow());
