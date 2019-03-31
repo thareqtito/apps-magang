@@ -32,70 +32,70 @@
 
     function mailerSent($id,$emailadmin,$emaipass,$nama,$day,$datetwo,$nokontrak,$uraian,$spj,$amd,$penagihan,$pembayaran,$progress,$email){
 
-                $abx = $emailadmin;
-                $bxx = $emaipass;
+        $abx = $emailadmin;
+        $bxx = $emaipass;
 
-                //Recipients
-                $to['email'] = $email;
-                $to['name'] = $nama."-".$email;
+        //Recipients
+        $to['email'] = $email;
+        $to['name'] = $nama."-".$email;
 
-                $date1 = new DateTime(getDateNow());
-                $date2 = new DateTime($datetwo);
+        $date1 = new DateTime(getDateNow());
+        $date2 = new DateTime($datetwo);
 
-                $mail = new PHPMailer;
-                $mail->isSMTP();                                      
-                $mail->SMTPAuth = true;                                               
-                $mail->Host = 'smtp.gmail.com';
-                $mail->Port = 465;
-                $mail->Username = $abx;                 
-                $mail->Password = $bxx;                           
-                $mail->SMTPSecure = 'ssl';
-                $mail->From = $emailadmin;
-                $mail->FromName = "PLN Cengkareng";
-                $mail->AddReplyTo($emailadmin,"PLN Cengkareng");
-                $mail->AddAddress($to['email'],$to['name']);                       
-                $mail->Priority = 1;
-                $mail->AddCustomHeader("X-MSMail-Priority: High");
-                $mail->WordWrap = 50;  
-                
-                //Content
-                $mail->isHTML(true);
-                $mail->AddEmbeddedImage('img/email_header.png', 'gg');
-                $mail->AddEmbeddedImage('images/PLN.png', 'logo');
-                $mail->AddEmbeddedImage('images/pln-grey.png', 'mono');
-                $bodyContent = "<div style='background-color:#ffffff;margin:auto;width:80%;border:20px solid #e8e8e8;'>";
-                $bodyContent .= "<div style='background-color:#00a65a;height:120px;padding:5px;overflow:hidden;'>";
-                $bodyContent .= "<img style='float:left;margin:5px;' src='cid:logo' width='6%'><img style='float:right;margin:5px;' src='cid:gg' width='50%'><br/>";
-                $bodyContent .= "</div>";
-                $bodyContent .= "<div style='padding:10px;'>";
-                $bodyContent .= "<p>Kepada yth, <b>$nama</b></p>";
-                if ($date2 > $date1){
-                    $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari Lagi</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
-                } else {
-                    $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda telah berakhir dari <b>$day hari yang lalu</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
-                }
-                $bodyContent .= "<table border='0' cellspacing='0' style='margin-left:20px;'>";
-                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>No Kontrak</b></td><td>: $nokontrak</td></tr>";
-                $bodyContent .= "<tr><td><b>Uraian</b></td><td>: $uraian</td></tr>";
-                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Nilai Kontrak SPJ/SPK</b></td><td>: $spj</td></tr>";
-                $bodyContent .= "<tr><td><b>Nilai Kontrak AKHIR/AMD</b></td><td>: $amd</td></tr>";
-                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Penagihan</b></td><td>: $penagihan</td></tr>";
-                $bodyContent .= "<tr><td><b>Pembayaran</b></td><td>: $pembayaran</td></tr>";
-                $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Progress</b></td><td>: $progress %</td></tr>";
-                $bodyContent .= "</table><p>Terima kasih</p></div>";
-                $bodyContent .= "<div style='background-color:#f2f2f2;height:110px;padding:10px;margin-top:10px;'>";
-                $bodyContent .= "<div style='margin-bottom:-5px;'><img style='margin:auto;display:block;'src='cid:mono' width='50'></div>";
-                $bodyContent .= "<div style='color:#d2d2d2;text-align:center;'><p>PLN Cengkareng, DKI Jakarta, Indonesia</p></div>";
-                $bodyContent .= "</div></div>";
+        $mail = new PHPMailer;
+        $mail->isSMTP();                                      
+        $mail->SMTPAuth = true;                                               
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;
+        $mail->Username = $abx;                 
+        $mail->Password = $bxx;                           
+        $mail->SMTPSecure = 'ssl';
+        $mail->From = $emailadmin;
+        $mail->FromName = "PLN Cengkareng";
+        $mail->AddReplyTo($emailadmin,"PLN Cengkareng");
+        $mail->AddAddress($to['email'],$to['name']);                       
+        $mail->Priority = 1;
+        $mail->AddCustomHeader("X-MSMail-Priority: High");
+        $mail->WordWrap = 50;  
+        
+        //Content
+        $mail->isHTML(true);
+        $mail->AddEmbeddedImage('img/email_header.png', 'gg');
+        $mail->AddEmbeddedImage('images/PLN.png', 'logo');
+        $mail->AddEmbeddedImage('images/pln-grey.png', 'mono');
+        $bodyContent = "<div style='background-color:#ffffff;margin:auto;width:80%;border:20px solid #e8e8e8;'>";
+        $bodyContent .= "<div style='background-color:#00a65a;height:120px;padding:5px;overflow:hidden;'>";
+        $bodyContent .= "<img style='float:left;margin:5px;' src='cid:logo' width='6%'><img style='float:right;margin:5px;' src='cid:gg' width='50%'><br/>";
+        $bodyContent .= "</div>";
+        $bodyContent .= "<div style='padding:10px;'>";
+        $bodyContent .= "<p>Kepada yth, <b>$nama</b></p>";
+        if ($date2 > $date1){
+            $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda akan berakhir <b>$day hari Lagi</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
+        } else {
+            $bodyContent .= "<p>Kami ingin menginformasikan kepada anda bahwa masa kontrak anda telah berakhir dari <b>$day hari yang lalu</b> yaitu tepat pada tanggal <b>$datetwo</b>.";
+        }
+        $bodyContent .= "<table border='0' cellspacing='0' style='margin-left:20px;'>";
+        $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>No Kontrak</b></td><td>: $nokontrak</td></tr>";
+        $bodyContent .= "<tr><td><b>Uraian</b></td><td>: $uraian</td></tr>";
+        $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Nilai Kontrak SPJ/SPK</b></td><td>: $spj</td></tr>";
+        $bodyContent .= "<tr><td><b>Nilai Kontrak AKHIR/AMD</b></td><td>: $amd</td></tr>";
+        $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Penagihan</b></td><td>: $penagihan</td></tr>";
+        $bodyContent .= "<tr><td><b>Pembayaran</b></td><td>: $pembayaran</td></tr>";
+        $bodyContent .= "<tr style='background-color:#f2f2f2;border-radius:5px;'><td><b>Progress</b></td><td>: $progress %</td></tr>";
+        $bodyContent .= "</table><p>Terima kasih</p></div>";
+        $bodyContent .= "<div style='background-color:#f2f2f2;height:110px;padding:10px;margin-top:10px;'>";
+        $bodyContent .= "<div style='margin-bottom:-5px;'><img style='margin:auto;display:block;'src='cid:mono' width='50'></div>";
+        $bodyContent .= "<div style='color:#d2d2d2;text-align:center;'><p>PLN Cengkareng, DKI Jakarta, Indonesia</p></div>";
+        $bodyContent .= "</div></div>";
 
-                $mail->Subject = 'Pemberitahuan - Kontrak Vendor PLN Cengkareng';
-                $mail->Body    = $bodyContent;
+        $mail->Subject = 'Pemberitahuan - Kontrak Vendor PLN Cengkareng';
+        $mail->Body    = $bodyContent;
 
-                if(!$mail->send()) {
-                    $err = 'Message could not be sent,';
-                    $err .= 'Mailer Error: ' . $mail->ErrorInfo;
-                }
-                $mail->ClearAddresses();
+        if(!$mail->send()) {
+            $err = 'Message could not be sent,';
+            $err .= 'Mailer Error: ' . $mail->ErrorInfo;
+        }
+        $mail->ClearAddresses();
     }
 
     function udpateCekNotif($id){

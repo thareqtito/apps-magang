@@ -31,8 +31,22 @@
                             $penagihantgl      = date('Y-m-d', strtotime($_POST['penagihan_tanggal']));
                             $penagihanrupiah   = $_POST['penagihan_rupiah'];
                             $pembayaranrupiah  = $_POST['pembayaran_rupiah'];
-                            $jangkanotif       = $_POST['jangka_notif'];
-                            $kirimnotif        = $_POST['kirim_notif'];
+
+                            $date1 = new DateTime(getDateNow());
+                            $date2 = new DateTime($tglselesai);
+                            $diff = $date1->diff($date2);
+
+                            if ($date2 > $date1){
+                                if($diff->days > 14){
+                                    $kirimnotif = 0;
+                                } elseif($diff->days <= 14){
+                                    $kirimnotif = 1;
+                                }
+                            } elseif($date2 < $date1) {
+                                $kirimnotif = 1;
+                            }
+
+                            // echo $kirimnotif;
 
                                 $input = mysqli_query($conn,"UPDATE tbl_vendor SET
                                         no_kontrak                  = '$nokontrak',
@@ -41,7 +55,6 @@
                                         uraian                      = '$uraian',
                                         tanggal_mulai               = '$tglmulai',
                                         tanggal_selesai             = '$tglselesai',
-                                        jangka_kirim_notif          = '$jangkanotif',
                                         kirim_notif                 = '$kirimnotif',
                                         nilai_kontrak_spj_spk       = '$nilkonspj',
                                         nilai_kontrak_akhir_amd     = '$nilkonakhir',
