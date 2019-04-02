@@ -46,8 +46,6 @@
                                 $kirimnotif = 1;
                             }
 
-                            // echo $kirimnotif;
-
                                 $input = mysqli_query($conn,"UPDATE tbl_vendor SET
                                         no_kontrak                  = '$nokontrak',
                                         nama_vendor                 = '$namavendor',
