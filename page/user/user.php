@@ -44,7 +44,9 @@
                                         <td><?php
                                         
                                         if ($data['login_role'] == 1){
-                                            echo '<a class="btn btn-info btn-xs"><span class="fa fa-lock"></span> user</a>';
+                                            echo '<a class="btn btn-info btn-xs"><span class="fa fa-lock"></span> Super User (RWX) </a>';
+                                        } else {
+                                            echo '<a class="btn btn-info btn-xs"><span class="fa fa-lock"></span> User (R) </a>';
                                         } ?></td>
                                         </td>
                                         <td>

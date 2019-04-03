@@ -7,14 +7,14 @@ if ($page == "dashboard") include("page/dashboard.php");
 elseif ($page == "logout") include("page/logout.php");
 
     // -------------------------- vendor --------------------------
-    elseif ($page == "vendor")           include("page/vendor/vendor.php");
-    elseif ($page == "vendoradd")        include("page/vendor/vendoradd.php");
-    elseif ($page == "vendoraddpro")     include("page/vendor/vendoraddpro.php");
-    elseif ($page == "vendoredit")       include("page/vendor/vendoredit.php");
-    elseif ($page == "vendoreditpro")    include("page/vendor/vendoreditpro.php");
-    elseif ($page == "vendorview")       include("page/vendor/vendorview.php");
-    elseif ($page == "vendordelete")     include("page/vendor/vendordelete.php");
-    elseif ($page == "vendorsent")       include("page/vendor/vendorsent.php");
+    elseif ($page == "kontrak")           include("page/kontrak/kontrak.php");
+    elseif ($page == "kontrakaddpro")     include("page/kontrak/kontrakaddpro.php");
+    elseif ($page == "kontrakadd")        include("page/kontrak/kontrakadd.php");
+    elseif ($page == "kontrakedit")       include("page/kontrak/kontrakedit.php");
+    elseif ($page == "kontrakeditpro")    include("page/kontrak/kontrakeditpro.php");
+    elseif ($page == "kontrakview")       include("page/kontrak/kontrakview.php");
+    elseif ($page == "kontrakdelete")     include("page/kontrak/kontrakdelete.php");
+    elseif ($page == "kontraksent")       include("page/kontrak/kontraksent.php");
 
     // -------------------------- user --------------------------
     elseif ($page == "user")             include("page/user/user.php");

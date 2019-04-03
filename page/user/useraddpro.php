@@ -21,12 +21,13 @@
                             $username        = $_POST['username'];
                             $password        = $_POST['password'];
                             $email           = $_POST['email'];
+                            $role            = $_POST['role'];
 
                                 $input = mysqli_query($conn,"INSERT INTO tbl_login SET
                                         username   = '$username',
                                         password   = '$password',
                                         email      = '$email',
-                                        login_role = 1
+                                        login_role = $role
                                         ") or die (mysqli_error($conn));
 
                                 if ($input){

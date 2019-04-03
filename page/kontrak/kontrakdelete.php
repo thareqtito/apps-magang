@@ -1,8 +1,8 @@
 <section class="content-header">
-    <h1>Vendor</h1>
+    <h1>Kontrak</h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a>Vendor</a></li>
+        <li><a>Kontrak</a></li>
     </ol>
 </section>
 <section class="content container-fluid">
@@ -10,7 +10,7 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Vendor</b> | Hapus</h3>  
+                    <h3 class="box-title"><b>Kontrak</b> | Hapus</h3>  
                 </div>
 
                 <div class="box-body">
@@ -40,7 +40,7 @@
                                             '</div>'.
                                         '</div>';
                                 echo "<meta http-equiv='refresh' content='1;
-                                url=?page=vendor'>";
+                                url=?page=kontrak'>";
                             } 
                         }     
                     ?>

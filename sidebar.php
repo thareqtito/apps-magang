@@ -25,10 +25,10 @@
         </a>
     </li>
     <?php } ?>
-    <li class="<?php if ($_GET['page'] == 'vendor' || $_GET['page'] == 'vendoradd' || $_GET['page'] == 'vendoraddpro' || $_GET['page'] == 'vendoredit'
-                || $_GET['page'] == 'vendoreditpro' || $_GET['page'] == 'vendorview' || $_GET['page'] == 'vendordelete'){ echo "active"; } ?>">
-        <a href="?page=vendor">
-            <i class="fa fa-users"></i><span>Vendor</span>
+    <li class="<?php if ($_GET['page'] == 'kontrak' || $_GET['page'] == 'kontrakadd' || $_GET['page'] == 'kontrakaddpro' || $_GET['page'] == 'kontrakedit'
+                || $_GET['page'] == 'kontrakeditpro' || $_GET['page'] == 'kontrakview' || $_GET['page'] == 'kontrakdelete'){ echo "active"; } ?>">
+        <a href="?page=kontrak">
+            <i class="fa fa-users"></i><span>kontrak</span>
         </a>
     </li>
 </section>

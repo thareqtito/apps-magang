@@ -40,6 +40,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Hak Akses</label>
+                                <select name="role" class="form-control">
+                                    <option style="display:none;">-- pilih salah satu --</option>
+                                    <option value="1">Super User (RWX)</option>
+                                    <option value="2">User (R)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer">
                     <input type="submit" name="submit" class="btn btn-success" value="Simpan">

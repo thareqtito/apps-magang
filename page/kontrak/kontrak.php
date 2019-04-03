@@ -1,8 +1,8 @@
 <section class="content-header">
-    <h1>Vendor</h1>
+    <h1>Kontrak</h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a>Vendor</a></li>
+        <li><a>Kontrak</a></li>
     </ol>
 </section>
 <section class="content container-fluid">
@@ -10,13 +10,17 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Vendor</b> | Notifikasi</h3>
+                    <h3 class="box-title"><b>Kontrak</b> | Notifikasi</h3>
                 </div>
                 <div class="box-body">
                     <?php
                         $sum        = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor"));
-                        $sudahkirim = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor WHERE kirim_notif<>0"));
-                        $count = @round((($sudahkirim/$sum)*100),0);
+                        $sudahkirim = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tbl_vendor WHERE kirim_notif<>0 OR kirim_notif_langsung <>0"));
+                        if ($sum != 0){
+                            $count = @round((($sudahkirim/$sum)*100),0);                            
+                        } else {
+                            $count = 0;
+                        }
                         $hasil = "width:".$count."%";
                     ?>
                     <div class="row">
@@ -64,7 +68,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="callout callout-info">
                 <h4>Informasi !</h4>
-                <p>Notifikasi email akan dikirimkan ketika 14 hari sebelum jangka waktu kontrak berakhir. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo 14 hari, silahkan klik tombol <a href="?page=vendor" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
+                <p>Notifikasi email akan dikirimkan ketika 14 hari sebelum jangka waktu kontrak berakhir. Jika notifikasi email belum dikirimkan ketika sudah masuk jatuh tempo 14 hari, silahkan klik tombol <a href="?page=kontrak" style="text-decoration:none;" class="btn btn-warning btn-xs"><span class="fa fa-refresh"></span> Refresh</a>. Notifikasi email akan otomatis dikirim dari sistem.</p>
             </div>
         </div>
     </div>
@@ -72,14 +76,16 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Vendor</b> | List</h3>
+                    <h3 class="box-title"><b>Kontrak</b> | List</h3>
                     <div class="pull-right">
-                        <a class="btn btn-warning" href="?page=vendor">
+                        <a class="btn btn-warning" href="?page=kontrak">
                             <span class="fa fa-refresh"></span> Refresh
                         </a>
-                        <a class="btn btn-success" href="?page=vendoradd">
+                        <?php if($userdata['login_role'] != 2) { ?>
+                        <a class="btn btn-success" href="?page=kontrakadd">
                             <span class="fa fa-plus-circle"></span> Tambah Data
                         </a>
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -91,7 +97,7 @@
                                     <th rowspan="2">NO</th>
                                     <th rowspan="2">NO KONTRAK</th>
                                     <th rowspan="2">NAMA VENDOR</th>
-                                    <th rowspan="2">EMAIL VENDOR</th>
+                                    <th rowspan="2">EMAIL</th>
                                     <th rowspan="2">URAIAN</th>
                                     <th colspan="2">TANGGAL</th>
                                     <th rowspan="2">NILAI KONTRAK SPJ/SPK</th>
@@ -101,7 +107,9 @@
                                     <th rowspan="2">PROGRESS PEKERJAAN</th>
                                     <th rowspan="2">KONTRAK BERAKHIR</th>
                                     <th rowspan="2">NOTIFIKASI EMAIL</th>
+                                    <?php if($userdata['login_role'] != 2){ ?>
                                     <th rowspan="2">AKSI</th>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
                                     <th>MULAI</th>
@@ -120,7 +128,13 @@
                                         <td><?= $no ?></td>
                                         <td><a class="btn btn-success btn-xs"><i class="fa fa-file"></i> <?= $data['no_kontrak'] ?></a></td>
                                         <td><?= $data['nama_vendor'] ?></td>
-                                        <td><?= $data['email_vendor'] ?></td>
+                                        <td>
+                                            <?php 
+                                                echo '<a class="btn btn-info" style="margin-bottom:3px;">Vendor : <b>'.$data['email_vendor'].'</b></a>';
+                                                echo '<a class="btn btn-info" style="margin-bottom:3px;">Ops 1 : <b>'.$data['email_ops1'].'</b></a>'; 
+                                                echo '<a class="btn btn-info" style="margin-bottom:3px;">Ops 2 : <b>'.$data['uraian'].'</b></a>';
+                                            ?>
+                                        </td>
                                         <td><?= $data['uraian'] ?></td>
                                         <td><span class="fa fa-calendar"></span> <?= date('d M Y', strtotime($data['tanggal_mulai'])) ?></td>
                                         <td><span class="fa fa-calendar"></span> <?= date('d M Y', strtotime($data['tanggal_selesai'])) ?></td>
@@ -165,7 +179,7 @@
                                             } else if ($diff->days > 14 && $diff->days <= 30){
                                                 echo $diff->d." Hari lagi";
                                             } else if ($diff->days <= 14 && $data['kirim_notif'] != 1){
-                                                mailerSent($data['id_vendor'],$quseradm['email'],$quseradm['email_pass'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_spj_spk']),buatrp($data['nilai_kontrak_akhir_amd']),buatrp($data['penagihan_rupiah']),buatrp($data['pembayaran_rupiah']),$data['progress_pekerjaan'],$data['email_vendor']);
+                                                mailerSent($data['id_vendor'],$quseradm['email'],$quseradm['email_pass'],$data['email_ops1'],$data['email_ops2'],$data['nama_vendor'],$diff->days,$data['tanggal_selesai'],$data['no_kontrak'],$data['uraian'],buatrp($data['nilai_kontrak_spj_spk']),buatrp($data['nilai_kontrak_akhir_amd']),buatrp($data['penagihan_rupiah']),buatrp($data['pembayaran_rupiah']),$data['progress_pekerjaan'],$data['email_vendor']);
                                                 udpateCekNotif($data['id_vendor']);
                                                 echo $diff->d." Hari lagi";
                                             } else {
@@ -184,20 +198,30 @@
                                         ?>
                                         </td>
                                         <td>
-                                        <?php 
-                                            if ($data['kirim_notif'] != 0 ){ 
-                                                echo "<button class='btn btn-success btn-xs'><span class='fa fa-check'></span> sudah terkirim</button>";
-                                                echo '<a href="?page=vendorsent&idvendor='.$data['id_vendor'].'&admail='.$quseradm['email'].'&adpass='.$quseradm['email_pass'].'&nama='.$data['nama_vendor'].'&day='.$diff->days.'&tglselesai='.$data['tanggal_selesai'].'&nokontrak='.$data['no_kontrak'].'&uraian='.$data['uraian'].'&spj='.buatrp($data['nilai_kontrak_spj_spk']).'&amd='.buatrp($data['nilai_kontrak_akhir_amd']).'&nagihrp='.buatrp($data['penagihan_rupiah']).'&bayarrp='.buatrp($data['pembayaran_rupiah']).'&progress='.$data['progress_pekerjaan'].'&email='.$data['email_vendor'].'" class="btn btn-warning btn-xs"><span class="fa fa-paper-plane"></span> kirim ulang notifikasi</a>';
+                                        <?php
+                                            if ($userdata['login_role'] != 2) { 
+                                                if ($data['kirim_notif'] != 0 || $data['kirim_notif_langsung'] != 0 ){ 
+                                                    echo "<button class='btn btn-success btn-xs'><span class='fa fa-check'></span> sudah terkirim</button>";
+                                                    echo '<a href="?page=kontraksent&idvendor='.$data['id_vendor'].'&admail='.$quseradm['email'].'&adpass='.$quseradm['email_pass'].'&cc1='.$data['email_ops1'].'&cc2='.$data['email_ops2'].'&nama='.$data['nama_vendor'].'&day='.$diff->days.'&tglselesai='.$data['tanggal_selesai'].'&nokontrak='.$data['no_kontrak'].'&uraian='.$data['uraian'].'&spj='.buatrp($data['nilai_kontrak_spj_spk']).'&amd='.buatrp($data['nilai_kontrak_akhir_amd']).'&nagihrp='.buatrp($data['penagihan_rupiah']).'&bayarrp='.buatrp($data['pembayaran_rupiah']).'&progress='.$data['progress_pekerjaan'].'&email='.$data['email_vendor'].'" class="btn btn-warning btn-xs"><span class="fa fa-paper-plane"></span> kirim ulang notifikasi</a>';
+                                                } else {
+                                                    echo "<button class='btn btn-danger btn-xs'><span class='fa fa-remove'></span> belum terkirim</button>";
+                                                    echo '<a href="?page=kontraksent&idvendor='.$data['id_vendor'].'&admail='.$quseradm['email'].'&adpass='.$quseradm['email_pass'].'&cc1='.$data['email_ops1'].'&cc2='.$data['email_ops2'].'&nama='.$data['nama_vendor'].'&day='.$diff->days.'&tglselesai='.$data['tanggal_selesai'].'&nokontrak='.$data['no_kontrak'].'&uraian='.$data['uraian'].'&spj='.buatrp($data['nilai_kontrak_spj_spk']).'&amd='.buatrp($data['nilai_kontrak_akhir_amd']).'&nagihrp='.buatrp($data['penagihan_rupiah']).'&bayarrp='.buatrp($data['pembayaran_rupiah']).'&progress='.$data['progress_pekerjaan'].'&email='.$data['email_vendor'].'" class="btn btn-warning btn-xs"><span class="fa fa-paper-plane"></span> kirim notifikasi</a>';
+                                                }
                                             } else {
-                                                echo "<button class='btn btn-danger btn-xs'><span class='fa fa-remove'></span> belum terkirim</button>";
-                                                echo '<a href="?page=vendorsent&idvendor='.$data['id_vendor'].'&admail='.$quseradm['email'].'&adpass='.$quseradm['email_pass'].'&nama='.$data['nama_vendor'].'&day='.$diff->days.'&tglselesai='.$data['tanggal_selesai'].'&nokontrak='.$data['no_kontrak'].'&uraian='.$data['uraian'].'&spj='.buatrp($data['nilai_kontrak_spj_spk']).'&amd='.buatrp($data['nilai_kontrak_akhir_amd']).'&nagihrp='.buatrp($data['penagihan_rupiah']).'&bayarrp='.buatrp($data['pembayaran_rupiah']).'&progress='.$data['progress_pekerjaan'].'&email='.$data['email_vendor'].'" class="btn btn-warning btn-xs"><span class="fa fa-paper-plane"></span> kirim notifikasi</a>';
+                                                if ($data['kirim_notif'] != 0 || $data['kirim_notif_langsung'] != 0 ){ 
+                                                    echo "<button class='btn btn-success btn-xs'><span class='fa fa-check'></span> sudah terkirim</button>";
+                                                } else {
+                                                    echo "<button class='btn btn-danger btn-xs'><span class='fa fa-remove'></span> belum terkirim</button>";
+                                                }
                                             }
                                         ?>
                                         </td>
+                                        <?php if($userdata['login_role'] != 2) { ?>
                                         <td>
-                                            <a class="btn btn-primary btn-xs" href="?page=vendoredit&id=<?= $data['id_vendor'] ?>"><i class="fa fa-edit"></i> edit</a>
-                                            <a class="btn btn-danger btn-xs" href="?page=vendordelete&id=<?= $data['id_vendor'] ?>"><i class="fa fa-trash"></i> hapus</a>
+                                            <a class="btn btn-primary btn-xs" href="?page=kontrakedit&id=<?= $data['id_vendor'] ?>"><i class="fa fa-edit"></i> edit</a>
+                                            <a class="btn btn-danger btn-xs" href="?page=kontrakdelete&id=<?= $data['id_vendor'] ?>"><i class="fa fa-trash"></i> hapus</a>
                                         </td>
+                                        <?php } ?>
                                     </tr>
                                 <?php $no++; } ?>
                             </tbody>

@@ -30,10 +30,10 @@
         return $datetime->format('m/d/Y');
     }
 
-    function mailerSent($id,$emailadmin,$emaipass,$nama,$day,$datetwo,$nokontrak,$uraian,$spj,$amd,$penagihan,$pembayaran,$progress,$email){
+    function mailerSent($id,$emailadmin,$emailpass,$mailcc1,$mailcc2,$nama,$day,$datetwo,$nokontrak,$uraian,$spj,$amd,$penagihan,$pembayaran,$progress,$email){
 
         $abx = $emailadmin;
-        $bxx = $emaipass;
+        $bxx = $emailpass;
 
         //Recipients
         $to['email'] = $email;
@@ -53,7 +53,9 @@
         $mail->From = $emailadmin;
         $mail->FromName = "PLN Cengkareng";
         $mail->AddReplyTo($emailadmin,"PLN Cengkareng");
-        $mail->AddAddress($to['email'],$to['name']);                       
+        $mail->AddAddress($to['email'],$to['name']);    
+        $mail->AddCC($mailcc1);
+        $mail->AddCC($mailcc2);                   
         $mail->Priority = 1;
         $mail->AddCustomHeader("X-MSMail-Priority: High");
         $mail->WordWrap = 50;  
@@ -104,10 +106,14 @@
                                      kirim_notif     = 1
                                      WHERE id_vendor = $id 
                                      ");
-        if ($query){
-            echo "<meta http-equiv='refresh' content='1;
-            url=?page=vendor'>";
-        }
+    }
+
+    function udpateCekNotifLangsung($id){
+        include 'lib/koneksi.php';
+        $query = mysqli_query($conn, "UPDATE tbl_vendor SET
+                                     kirim_notif_langsung = 1
+                                     WHERE id_vendor = $id 
+                                     ");
     }
 ?>
 <nav class="navbar navbar-static-top" role="navigation">
@@ -120,12 +126,12 @@
         <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.png" class="user-image" alt="User Image">
-                <span><?= $userdata['username'] ?></span>
+                <span><?= strtoupper($userdata['username']) ?></span>
             </a>
             <ul class="dropdown-menu">
                 <li class="user-header">
                     <img src="images/admin.png" class="img-circle" alt="User Image">
-                    <p><b><a href="?page=profile&id=<?=$userdata['id_login'] ?>" title="lihat profil" style="color:#fff;"><?= $userdata['username'] ?></a></b></p>
+                    <p><b><a href="?page=profile&id=<?=$userdata['id_login'] ?>" title="lihat profil" style="color:#fff;"><?= strtoupper($userdata['username']) ?></a></b></p>
                     Terakhir Login : <?= $userdata['last_active'] ?>
                 </li>
                 <li class="user-footer">

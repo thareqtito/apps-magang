@@ -22,11 +22,13 @@
                             $username         = $_POST['username'];
                             $password         = $_POST['password'];
                             $email            = $_POST['email'];
+                            $role             = $_POST['role'];
 
                             $input = mysqli_query($conn,"UPDATE tbl_login SET
                                     username       = '$username',
                                     password       = '$password',
-                                    email          = '$email'
+                                    email          = '$email',
+                                    login_role     = $role
                                     WHERE id_login = $idlogin
                                     ") or die (mysqli_error($conn));
 

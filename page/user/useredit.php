@@ -46,6 +46,17 @@ $data = mysqli_fetch_array($query)
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Hak Akses</label>
+                                <select name="role" class="form-control">
+                                    <option value="1" <?= ($data['login_role'] == 1)?"selected":"" ?>>Super User (RWX)</option>
+                                    <option value="2">User (R) <?= ($data['login_role'] == 2)?"selected":"" ?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer">
                     <input type="submit" name="submit" class="btn btn-success" value="Simpan">
